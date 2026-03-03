@@ -20,7 +20,7 @@ public class Car {
             this.brand = brand;
         }
     }
-    @
+
     public Car(String brand, int power, String fuel) {
         this(brand);
         this.engine = new Engine(fuel, power);
@@ -45,7 +45,7 @@ public class Car {
     }
 
     public Engine getEngine() {
-        return engine;
+        return new Engine(engine);
     }
 
     @Override
