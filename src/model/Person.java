@@ -11,6 +11,7 @@ public class Person {
     public Person() {
         this.identificationNumber = personCounter;
         personCounter++;
+        this.car = null;
     }
 
     public Person(String firstName, String lastName, String address) {
@@ -37,7 +38,7 @@ public class Person {
     }
 
     public int getCarId() {
-        if(car != null) {
+        if (car != null) {
             return car.getRegistrationNumber();
         }
         return -1;
@@ -54,17 +55,19 @@ public class Person {
 
     public boolean assign(Car car) {
         // Checks
-        if (isPedestrian() && car != null) {
+        if (car != null && car.isAvailable() && isPedestrian()) {
             this.car = car;
-            return true;
+            return car.assign(this);
         }
         return false;
     }
 
     public boolean returnCar() {
         if (!isPedestrian()) {
+            car.releaseDriver();
             car = null;
             return true;
+
         }
         return false;
     }
@@ -87,29 +90,48 @@ public class Person {
         Engine e2 = new Engine("PETROL", 1000);
 
         // Cars
-        Car c1 = new Car(null, e1);
-        Car c2 = new Car("Ferrari", e2);
+        Car c1 = new Car("Peugeot");
+        Car c2 = new Car("Renault", e1);
+        Car c3 = new Car("Ferrari", e2);
 
         // Persons
-        Person p1 = new Person();
-        Person p2 = new Person("Jean", "Dupont", "Villeneuve d'Ascq");
-        Person p3 = new Person("Victor", "Forcioli", "Pontcharra");
+        Person p1 = new Person("Jean", "Dupont", "Villeneuve d'Ascq");
+        Person p2 = new Person("Victor", "Forcioli", "Pontcharra");
+        Person p3 = new Person("Denis", "Auz", "Paris");
 
+        System.out.println(" = Persons = ");
         System.out.println("p1 : " + p1);
         System.out.println("p2 : " + p2);
-        System.out.println("p3 : " + p3);
 
-        p2.assign(c2);
-        System.out.println("p2 : " + p2);
+        System.out.println("p2.assign(c2) -> " + p1.assign(c1));
 
-        System.out.println("\n\t=== Tests ===");
+        System.out.println("c2 (après assignation) : " + c2);
+        System.out.println("p2 (après assignation) : " + p2);
 
-        Car c = null;
+        System.out.println("\n\t=== Tests Q15 ===");
+
         // you try to assign a car which is null to a person;
-        System.out.println("assign a car which is null to a person : " + p3.assign(c) + " (pedestrian:"+ p3.isPedestrian()+")");
+        System.out.println("- assign a car which is null to a person : " + p2.assign(null) + " (pedestrian:" + p2.isPedestrian() + ")");
         // you try to assign a car to a person who already drives a car;
-        System.out.println("assign a car to a person who already drives a car : " + p2.assign(c1));
+        System.out.println("- assign a car to a person who already drives a car : " + p1.assign(c2));
         // you try to assign the same car to two different people.
-        System.out.println("assign the same car to two different people : " + p1.assign(c1));
+        System.out.println("- assign the same car to two different people : " + p2.assign(c1));
+
+        System.out.println("\n\t=== Tests Q20 ===");
+        // p1 - c1
+
+        // you try to assign a car that already has a driver to a person;
+        System.out.println("- assign a car that already has a driver to a person (false): " + p2.assign(c1));
+        // you try to assign a car to a person that already drives another car;
+        System.out.println("- assign a car to a person that already drives another car (false) : " + p1.assign(c2));
+        // you try to assign a person who is null to a car;
+        System.out.println("- assign a person who is null to a car (false) : " + c2.assign(null));
+        // you try to assign a pedestrian person to a car;
+        System.out.println("- assign a pedestrian person to a car (true) : " + p2.assign(c2));
+        // you try to assign a person to a car that already has a driver;
+        System.out.println("- assign a person to a car that already has a driver (false) : " + p3.assign(c2));
+        // you try to assign to a car a person who drives another car.
+        System.out.println("- assign a person to a car that already has a driver (false) : " + p2.assign(c3));
+
     }
 }
