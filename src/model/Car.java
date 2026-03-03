@@ -1,15 +1,15 @@
 package model;
 
 public class Car {
-    private static int registration_counter;
+    private static int registrationCounter;
 
-    private final int registration_number;
+    private final int registrationNumber;
     private String brand;
     private Engine engine;
 
     public Car() {
-        this.registration_number = registration_counter;
-        registration_counter++;
+        this.registrationNumber = registrationCounter;
+        registrationCounter++;
         this.brand = "??";
         this.engine = new Engine();
     }
@@ -36,8 +36,8 @@ public class Car {
         this.engine = engine;
     }
 
-    public int getRegistration_number() {
-        return registration_number;
+    public int getRegistrationNumber() {
+        return registrationNumber;
     }
 
     public String getBrand() {
@@ -51,7 +51,7 @@ public class Car {
     @Override
     public String toString() {
         return "Car{" +
-                "registration_number=" + registration_number +
+                "registrationNumber=" + registrationNumber +
                 ", brand='" + brand + '\'' +
                 ", engine=" + engine +
                 '}';
