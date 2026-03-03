@@ -16,20 +16,21 @@ public class Car {
 
     public Car(String brand) {
         this();
-        this.brand = brand;
+        if (brand != null) {
+            this.brand = brand;
+        }
     }
-
+    @
     public Car(String brand, int power, String fuel) {
-        this();
-        this.brand = brand;
+        this(brand);
         this.engine = new Engine(fuel, power);
     }
 
     public Car(String brand, Engine engine) {
-        this();
-        this.brand = brand;
+        this(brand);
         this.engine = engine;
     }
+
 
     public void setEngine(Engine engine) {
         this.engine = engine;
@@ -62,11 +63,11 @@ public class Car {
         Car c1 = new Car(null, e1);
         Car c2 = new Car("Ferrari", e2);
         Car c3 = new Car("Ferrari", e2);
-        System.out.println("c1 : " + c1.toString());
-        System.out.println("c2 : " + c2.toString());
-        System.out.println("c3 : " + c3.toString());
+        System.out.println("c1 : " + c1);
+        System.out.println("c2 : " + c2);
+        System.out.println("c3 : " + c3);
         e2.setPower(1200);
-        System.out.println("c2 : " + c2.toString());
-        System.out.println("c3 : " + c3.toString());
+        System.out.println("c2 : " + c2);
+        System.out.println("c3 : " + c3);
     }
 }
