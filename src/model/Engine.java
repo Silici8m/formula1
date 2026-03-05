@@ -56,9 +56,10 @@ public class Engine {
 
     @Override
     public String toString() {
-        return "model.Engine : " +
-                "fuel = " + this.fuel +
-                " ; power = " + this.power;
+        return "Engine{" +
+                "fuel=" + fuel +
+                ", power=" + power +
+                "}";
     }
 
     static void main() {

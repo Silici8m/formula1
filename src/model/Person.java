@@ -55,7 +55,7 @@ public class Person {
 
     public boolean assign(Car car) {
         // Checks
-        if (car != null && car.isAvailable() && isPedestrian()) {
+        if (car != null && car.isAvailable() && isCompatible(car) && isPedestrian()) {
             this.car = car;
             return car.assign(this);
         }
@@ -69,6 +69,10 @@ public class Person {
             return true;
 
         }
+        return false;
+    }
+
+    public boolean isCompatible(Car c) {
         return false;
     }
 
@@ -94,10 +98,22 @@ public class Person {
         Car c2 = new Car("Renault", e1);
         Car c3 = new Car("Ferrari", e2);
 
+        Truck t1 = new Truck("Renault", 10);
+        Truck t2 = new Truck("Mercedes", 2000, "PETROL", 20);
+
+        Formula1 f1 = new Formula1("Renault", "Redbull");
+        Formula1 f2 = new Formula1("Ferrari", 800, "DIESEL", "sponsor");
+
         // Persons
         Person p1 = new Person("Jean", "Dupont", "Villeneuve d'Ascq");
         Person p2 = new Person("Victor", "Forcioli", "Pontcharra");
         Person p3 = new Person("Denis", "Auz", "Paris");
+
+        // Racers
+        Racer r1 = new Racer("Michael", "Schumacher ", "Spinveld 204815 HS Breda");
+
+        // Technicians
+        Technician tech1 = new Technician("Victor", "Forcioli", "Pontcharra");
 
         System.out.println(" = Persons = ");
         System.out.println("p1 : " + p1);
@@ -133,5 +149,15 @@ public class Person {
         // you try to assign to a car a person who drives another car.
         System.out.println("- assign a person to a car that already has a driver (false) : " + p2.assign(c3));
 
+        p2.returnCar();
+
+        // Test des compatibilités
+        System.out.println(" === Tests compatibilité ===");
+        System.out.println("Assignation d'une formule1 à un technicien (false) : " + tech1.assign(f1));
+        System.out.println("Assignation d'un camion à un pilote (false) : " + p1.assign(t1));
+        System.out.println("Assignation d'une formule1 à un pilote (true) : " + r1.assign(f1));
+        System.out.println("Assignation d'un camion à un technicien (true) : " + tech1.assign(t1));
+        tech1.returnCar();
+        p1.returnCar();
     }
 }
