@@ -39,6 +39,7 @@ public class Technician extends Person{
      */
     @Override
     public boolean isCompatible(Car c) {
+        if (c == null) return false;
         return c instanceof Truck;
     }
 

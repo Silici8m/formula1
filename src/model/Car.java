@@ -1,6 +1,6 @@
 package model;
 
-public class Car {
+public abstract class Car {
     private static int registrationCounter;
 
     private final int registrationNumber;
@@ -85,16 +85,6 @@ public class Car {
     }
 
     static void main() {
-        Engine e1 = new Engine();
-        Engine e2 = new Engine("PETROL", 1000);
-        Car c1 = new Car(null, e1);
-        Car c2 = new Car("Ferrari", e2);
-        Car c3 = new Car("Ferrari", e2);
-        System.out.println("c1 : " + c1);
-        System.out.println("c2 : " + c2);
-        System.out.println("c3 : " + c3);
-        e2.setPower(1200);
-        System.out.println("c2 : " + c2);
-        System.out.println("c3 : " + c3);
+        
     }
 }

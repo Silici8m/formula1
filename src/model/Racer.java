@@ -55,6 +55,7 @@ public class Racer extends Person{
 
     @Override
     public boolean isCompatible(Car c) {
+        if (c == null) return false;
         return c instanceof Formula1;
     }
 
